@@ -71,7 +71,7 @@ class GoogleSearchResultParser(object):
     return item.find("div", class_="s").find("cite").get_text()
 
   def getContent(self, item):
-    return item.find("div", class_="s").find("span", class_="st").get_text()
+    return unicode(item.find("div", class_="s").find("span", class_="st").get_text()).encode('utf8')
   
   def getResultStats(self):
     statsStr = self.soup.select("#resultStats")[0].get_text()
