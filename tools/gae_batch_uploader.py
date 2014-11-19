@@ -31,7 +31,17 @@ def loadGaeApps(inputFile):
 def changeAppId(inputFile, gaeId):
   cmd = "sed -i 's/application: .*/application: " + gaeId + "/g' " + inputFile
   os.system(cmd)
-#changeAppId('/home/archer/Documents/Google-Slave/src/GAE-Slave/app.yaml', 'test')
+
+# removeCookies
+# remove cookie file
+#
+# @param path
+# @return none
+def rmCookies(path):
+  try:
+    os.remove(path + '.appcfg_.*')
+  except:
+    pass
 
 # appCfg
 # invoke app config to upload
@@ -43,6 +53,7 @@ def main():
   app_list_file = '/home/archer/Documents/Google-Slave/tools/gae_app_list.csv'
   app_yaml_file = '/home/archer/Documents/Google-Slave/src/GAE-Slave/app.yaml'
   application_dir = '/home/archer/Documents/Google-Slave/src/GAE-Slave/'
+  cookie_path = '/home/archer/'
 
   app_lists = loadGaeApps(app_list_file)
   #print app_lists
@@ -53,6 +64,7 @@ def main():
         cmd = "appcfg.py --email=" + lst[0] + " --no_cookies update " +\
         application_dir
         #print cmd
+        rmCookies(cookie_path)
         os.system(cmd)
       else:
         cmd = "appcfg.py update " + application_dir
