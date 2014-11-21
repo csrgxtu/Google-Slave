@@ -27,7 +27,6 @@ def Google_Web_Search_Helper(q, hl='en', start=0):
   Google_Web_Search_URL = Google_Web_Search_URL + '&hl=' + hl
   Google_Web_Search_URL = Google_Web_Search_URL + '&start=' + start
 
-  """
   d = Download(Google_Web_Search_URL)
   if d.doRequest():
     return {}
@@ -39,3 +38,4 @@ def Google_Web_Search_Helper(q, hl='en', start=0):
   logging.info(type(result))
   g = GoogleSearchResultParser(result.content)
   return g.getJson()
+  """
